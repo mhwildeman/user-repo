@@ -14,6 +14,13 @@ async function init(){
   });
   
   await db.exec('CREATE TABLE if not exists user (id TEXT, username TEXT NOT NULL UNIQUE, password)');
+  try{
+  await db.exec('ALTER TABLE user ADD COLUMN first_name TEXT;');
+  await db.exec('ALTER TABLE user ADD COLUMN infix TEXT;');
+  await db.exec('ALTER TABLE user ADD COLUMN last_name TEXT;');
+  await db.exec('ALTER TABLE user ADD COLUMN display_name TEXT;');
+  }
+  catch(e){}
 }
 
 init();
@@ -31,18 +38,18 @@ function addUser(username, password) {
 }
 
 function getUsers() {
-  return db.all('SELECT id, username FROM user;');
+  return db.all('SELECT id, username, first_name, infix, last_name FROM user;');
 }
 
 
 function getUser(username) {
-  return db.get('SELECT id, username FROM user where username = :username', {
+  return db.get('SELECT id, username, first_name, infix, last_name FROM user where username = :username', {
     ':username': username
   });
 }
 
 function getUserById(id) {
-  return db.get('SELECT id, username FROM user where id = :id', {
+  return db.get('SELECT id, username, first_name, infix, last_name FROM user where id = :id', {
     ':id': id
   });
 }
