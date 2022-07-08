@@ -57,6 +57,18 @@ app.get('/users/:id', function (req, res) {
     
   });
 
+  app.delete('/users/:id', function (req, res) {
+    userDb.deleteUserById(req.params.id).then(result=>{
+        if(result.changes === 1){
+            res.status(204).end();
+        }
+        else{
+            res.status(404).json({error:"Not found"});
+        }
+    });
+    
+  });
+
 app.post('/users', jsonParser, function (req, res) {
     res.type('json');
     userDb.addUser(req.body.username, req.body.password).then(id => {
@@ -69,10 +81,16 @@ app.post('/users', jsonParser, function (req, res) {
             
         }
     });
-})
+});
+
+app.post('/check-password', jsonParser, function (req,res) {
+    userDb.checkPassword(req.body.username, req.body.password).then(result =>{
+        res.status(200).json({isValid:result});
+    })
+});
  
  var server = app.listen(8081, function () {
     var host = server.address().address
     var port = server.address().port
     console.log("Example app listening at http://%s:%s", host, port)
- })
+ });

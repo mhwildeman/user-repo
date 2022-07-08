@@ -18,7 +18,7 @@ async function init(){
 
 init();
 
-module.exports = {addUser:addUser,getUser:getUser,deleteUser:deleteUser,checkPassword:checkPassword,getUsers:getUsers,getUserById:getUserById};
+module.exports = {addUser:addUser,getUser:getUser,checkPassword:checkPassword,getUsers:getUsers,getUserById:getUserById,deleteUserById:deleteUserById};
 function addUser(username, password) {
   return new Promise((resolve, reject) => {
     let id = uuidv4();
@@ -47,9 +47,9 @@ function getUserById(id) {
   });
 }
 
-function deleteUser(username) {
-  return db.run('DELETE FROM user where username = :username', {
-    ':username': username
+function deleteUserById(id) {
+  return db.run('DELETE FROM user where id = :id', {
+    ':id': id
   });
 }
 
