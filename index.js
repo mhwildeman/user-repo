@@ -71,7 +71,7 @@ app.get('/users/:id', function (req, res) {
 
 app.post('/users', jsonParser, function (req, res) {
     res.type('json');
-    userDb.addUser(req.body.username, req.body.password).then(id => {
+    userDb.addUser(req.body.username, req.body.password, req.body.first_name, req.body.infix, req.body.last_name).then(id => {
         if(id!=='')
             res.json({id:id})
         else{

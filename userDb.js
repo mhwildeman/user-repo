@@ -26,12 +26,12 @@ async function init(){
 init();
 
 module.exports = {addUser:addUser,getUser:getUser,checkPassword:checkPassword,getUsers:getUsers,getUserById:getUserById,deleteUserById:deleteUserById};
-function addUser(username, password) {
+function addUser(username, password, firstName, infix, lastName) {
   return new Promise((resolve, reject) => {
     let id = uuidv4();
     bcrypt.hash(password, SALT_ROUNDS)
-      .then(passwordHash => db.run('INSERT INTO user(id, username, password) VALUES (:id, :username, :password)', {
-        ':id': id, ':username': username, ':password': passwordHash
+      .then(passwordHash => db.run('INSERT INTO user(id, username, password, first_name, infix, last_name) VALUES (:id, :username, :password, :firstname, :infix, :last_name)', {
+        ':id': id, ':username': username, ':password': passwordHash,':firstname': firstName, ':infix':infix, ':last_name':lastName
       }))
       .then(result => resolve(id)).catch(error => {resolve(''); })
   });
