@@ -1,0 +1,21 @@
+{
+  "name": "user-repo",
+  "version": "1.0.0",
+  "description": "Simple user repository with restful interface, BCRYPT password storage and basic auth api protection",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "express-basic-auth": "^1.2.1",
+    "sqlite": "^4.1.1",
+    "sqlite3": "^5.0.8",
+    "uuid": "^8.3.2"
+  }
+}
